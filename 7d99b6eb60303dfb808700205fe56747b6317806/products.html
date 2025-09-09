@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Joanne Project You - Products</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+
+<!-- Header -->
+<!-- <header class="bg-gray-900 text-white py-6 text-center shadow-md">
+  <h1 class="text-3xl sm:text-4xl font-bold">The Products</h1>
+  <p class="text-gray-300 mt-2 text-sm sm:text-base">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+</header> -->
+<div id="header"></div>
+
+<!-- Navbar -->
+<div id="navbar"></div>
+
+<!-- Products Grid -->
+<main class="flex-grow">
+  <section id="products-page" class="max-w-6xl mx-auto my-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-4">
+    <!-- Product cards will be injected here by JS -->
+  </section>
+</main>
+
+<!-- Footer -->
+<div id="footer"></div>
+
+<!-- Scripts -->
+<script src="js/layout.js"></script>
+<script src="js/products.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    renderProducts("products-page");
+  });
+</script>
+</body>
+</html>
