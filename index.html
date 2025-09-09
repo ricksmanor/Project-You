@@ -178,7 +178,7 @@
 
   <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
   <script src="https://rawcdn.githack.com/chrisveness/crypto/7067ee62f18c76dd4a9d372a00e647205460b62b/sha1.js"></script>
-  <script>
+  <!-- <script>
     "use strict";
     function loadPage(pwd) {
       var hash = Sha1.hash(pwd);
@@ -196,6 +196,49 @@
     $("#loginbutton").on("click", function() { loadPage($("#password").val()); });
     $("#password").keypress(function(e) { if (e.which == 13) loadPage(this.value); });
     $("#password").focus();
-  </script>
+  </script> -->
+
+<script>
+"use strict";
+
+// Function to attempt login
+function loadPage(pwd) {
+  // Generate SHA1 hash of the entered password
+  const hash = Sha1.hash(pwd);
+  const url = hash + "/index.html";
+
+  // Try to load the hashed folder's index.html
+  $.ajax({
+    url: url,
+    dataType: "html",
+    success: function() {
+      // Folder exists → redirect to it
+      window.location.href = url;
+    },
+    error: function() {
+      // Folder doesn't exist → show error
+      const $wrong = $("#wrongPassword");
+      const $input = $("#password");
+
+      $wrong.show();
+      $input.val("").attr("placeholder", "Wrong code").focus();
+    }
+  });
+}
+
+// Click handler for button
+$("#loginbutton").on("click", function() {
+  loadPage($("#password").val());
+});
+
+// Press Enter in the input to login
+$("#password").on("keypress", function(e) {
+  if (e.which === 13) loadPage(this.value);
+});
+
+// Autofocus password field on page load
+$("#password").focus();
+</script>
+
 </body>
 </html>

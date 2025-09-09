@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Joanne Project You</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+
+<header class="bg-gray-900 text-white py-8 text-center shadow-md">
+  <h1 class="text-4xl font-bold">Dashboard</h1>
+  <p class="mt-2 text-gray-300">All sections in one place</p>
+</header>
+
+<div id="navbar"></div>
+
+<main class="flex-grow">
+  <div class="max-w-6xl mx-auto my-8 px-4">
+    <!-- Tabs -->
+    <div class="flex flex-wrap gap-2 border-b border-gray-300">
+      <button class="tab-btn px-4 py-2 font-semibold" data-tab="products">Products</button>
+      <button class="tab-btn px-4 py-2 font-semibold" data-tab="about">About</button>
+      <button class="tab-btn px-4 py-2 font-semibold" data-tab="blog">Blog</button>
+      <button class="tab-btn px-4 py-2 font-semibold" data-tab="contact">Contact</button>
+    </div>
+
+    <!-- Tab Content -->
+    <div id="tab-content" class="mt-6"></div>
+  </div>
+</main>
+
+<div id="footer"></div>
+
+<script src="js/layout.js"></script>
+<script src="js/products.js"></script>
+<script src="js/about.js"></script>
+<script src="js/blog.js"></script>
+<script src="js/contact.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const tabContent = document.getElementById("tab-content");
+    const tabs = document.querySelectorAll(".tab-btn");
+
+    function loadTab(tab) {
+      tabContent.innerHTML = "";
+      if (tab === "products") renderProducts("tab-content");
+      if (tab === "about") renderAbout("tab-content");
+      if (tab === "blog") renderBlog("tab-content");
+      if (tab === "contact") renderContact("tab-content");
+    }
+
+    tabs.forEach(btn => {
+      btn.addEventListener("click", () => {
+        tabs.forEach(b => b.classList.remove("border-b-2", "border-gray-900"));
+        btn.classList.add("border-b-2", "border-gray-900");
+        loadTab(btn.dataset.tab);
+      });
+    });
+
+    loadTab("products"); // default
+  });
+</script>
+</body>
+</html>
